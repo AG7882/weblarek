@@ -75,3 +75,4 @@ catalogService.getProducts().then((data) => {
 });
 
 console.log("массив items", items.getProducts());
+console.log("массив catalogService", catalogService.getProducts());
