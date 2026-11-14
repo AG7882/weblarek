@@ -18,9 +18,7 @@ console.log(
   products.getProductById("854cef69-976d-4c2a-a18c-2aa45046c390"),
 );
 
-const testProd: IProduct = products.getProductById(
-  "854cef69-976d-4c2a-a18c-2aa45046c390",
-);
+const testProd = apiProducts.items[0];
 
 console.log("Проверяем setSelectedProduct/getSelectedProduct()");
 console.log("getSelectedProduct()", products.getSelectedProduct());
@@ -72,7 +70,9 @@ const items = new Catalog();
 
 catalogService.getProducts().then((data) => {
   items.setProducts(data.items);
+  console.log('Каталог из API:', items.getProducts());
 });
 
 console.log("массив items", items.getProducts());
 console.log("массив catalogService", catalogService.getProducts());
+

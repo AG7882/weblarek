@@ -3,7 +3,7 @@ import { IApi, CatalogResponse, OrderPayload } from "../../types/index";
 export class ApiService {
   private iApi: IApi;
 
-  constructor(private api: IApi) {
+  constructor(api: IApi) {
     this.iApi = api;
   }
 
