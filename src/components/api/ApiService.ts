@@ -7,11 +7,11 @@ export class ApiService {
     this.iApi = api;
   }
 
-  async getProducts(): Promise<CatalogResponse> {
+  getProducts(): Promise<CatalogResponse> {
     return this.iApi.get<CatalogResponse>("/product/");
   }
 
-  async sendOrder(data: OrderPayload): Promise<void> {
-    this.iApi.post("/order/", data);
+  sendOrder(data: OrderPayload): Promise<OrderPayload> {
+    return this.iApi.post<OrderPayload>("/order/", data);
   }
 }

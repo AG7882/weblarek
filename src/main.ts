@@ -48,8 +48,9 @@ console.log("cart getTotalPrice()", cart.getTotalPrice());
 console.log("cart getCartCount()", cart.getCartCount());
 console.log("cart hasItem()", cart.hasItem(testProd.id));
 
-const john = new Buyer({
-  payment: { method: "cash" },
+const john = new Buyer();
+john.saveData({
+  payment: "cash",
   email: "1",
   phone: "1",
   address: "1",
@@ -60,19 +61,28 @@ console.log("Buyer clearData()");
 john.clearData();
 console.log("Buyer getData()", john.getData());
 console.log("Buyer saveData()");
-john.saveData({ method: "card" }, "2", "", "2");
+john.saveData({
+  payment: "card",
+  email: "2",
+  phone: "",
+  address: "2",
+});
 console.log("Buyer getData()", john.getData());
 console.log("Buyer validate()", john.validate());
 
 const apiClient = new Api(API_URL);
 const catalogService = new ApiService(apiClient);
-const items = new Catalog();
 
-catalogService.getProducts().then((data) => {
-  items.setProducts(data.items);
-  console.log('Каталог из API:', items.getProducts());
-});
-
-console.log("массив items", items.getProducts());
-console.log("массив catalogService", catalogService.getProducts());
-
+catalogService
+  .getProducts()
+  .then((data) => {
+    products.setProducts(data.items);
+    console.log("Каталог из API:", products.getProducts());
+  })
+  .catch((e) => {
+    console.error("Ошибка получения", e);
+  })
+  .then(() => {
+    console.log("массив items", products.getProducts());
+    console.log("массив catalogService", catalogService.getProducts());
+  });

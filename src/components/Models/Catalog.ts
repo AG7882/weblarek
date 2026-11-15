@@ -1,8 +1,6 @@
 import { IProduct } from "../../types/index";
 
-
-
-export class Catalog  {
+export class Catalog {
   private products: IProduct[];
   private selectedProduct: IProduct | null;
 
@@ -19,8 +17,8 @@ export class Catalog  {
     return this.products;
   }
 
-  getProductById(id: string): IProduct | null {
-    return this.products.find((item) => item.id === id) || null;
+  getProductById(id: string): IProduct | undefined {
+    return this.products.find((item) => item.id === id) || undefined;
   }
 
   setSelectedProduct(product: IProduct): void {

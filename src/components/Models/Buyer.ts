@@ -1,59 +1,67 @@
-import { IBuyer, TPayment, ValidationError } from "../../types/index";
+import { IBuyer, TPayment, ValidationErrors } from "../../types/index";
 
 export class Buyer implements IBuyer {
-  payment: TPayment;
-  email: string;
-  phone: string;
-  address: string;
+  private _payment: TPayment = "";
+  private _email: string = "";
+  private _phone: string = "";
+  private _address: string = "";
 
-  constructor(data: IBuyer) {
-    this.payment = data.payment;
-    this.email = data.email;
-    this.phone = data.phone;
-    this.address = data.address;
+  get payment(): TPayment {
+    return this._payment;
+  }
+  get email(): string {
+    return this._email;
+  }
+  get phone(): string {
+    return this._phone;
+  }
+  get address(): string {
+    return this._address;
   }
 
-  saveData(
-    payment?: TPayment,
-    address?: string,
-    phone?: string,
-    email?: string,
-  ): void {
-    if (payment !== undefined) this.payment = payment;
-    if (address !== undefined) this.address = address;
-    if (phone !== undefined) this.phone = phone;
-    if (email !== undefined) this.email = email;
+  constructor() {
+    /* this._payment = "";
+    this._email = "";
+    this._phone = "";
+    this._address = "";*/
+  }
+
+  saveData(data: Partial<IBuyer>): void {
+    if (data.payment !== undefined) this._payment = data.payment;
+    if (data.address !== undefined) this._address = data.address;
+    if (data.phone !== undefined) this._phone = data.phone;
+    if (data.email !== undefined) this._email = data.email;
   }
 
   getData(): IBuyer {
     return {
-      payment: this.payment,
-      email: this.email,
-      phone: this.phone,
-      address: this.address,
+      payment: this._payment,
+      email: this._email,
+      phone: this._phone,
+      address: this._address,
     };
   }
 
   clearData(): void {
-    this.payment = { method: "" };
-    this.address = "";
-    this.phone = "";
-    this.email = "";
+    this._payment = "";
+    this._address = "";
+    this._phone = "";
+    this._email = "";
   }
 
-  validate(): ValidationError {
-    const errors: ValidationError = {};
+  validate(): ValidationErrors {
+    const errors: ValidationErrors = {};
 
-    if (!this.payment) {
+    if (!this._payment) {
       errors.payment = "Необходимо выбрать вид оплаты";
     }
-    if (!this.address.trim()) {
+    if (!this._address.trim()) {
       errors.address = "Необходимо указать адрес доставки";
     }
-    if (!this.phone.trim()) {
+    if (!this._phone.trim()) {
       errors.phone = "Необходимо ввести номер телефона";
     }
-    if (!this.email.trim()) {
+    if (!this._email.trim()) {
       errors.email = "Необходимо ввести email";
     }
 
