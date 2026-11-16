@@ -82,7 +82,4 @@ catalogService
   .catch((e) => {
     console.error("Ошибка получения", e);
   })
-  .then(() => {
-    console.log("массив items", products.getProducts());
-    console.log("массив catalogService", catalogService.getProducts());
-  });
+  

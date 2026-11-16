@@ -1,23 +1,10 @@
 import { IBuyer, TPayment, ValidationErrors } from "../../types/index";
 
-export class Buyer implements IBuyer {
+export class Buyer /*implements IBuyer*/ {
   private _payment: TPayment = "";
   private _email: string = "";
   private _phone: string = "";
   private _address: string = "";
-
-  get payment(): TPayment {
-    return this._payment;
-  }
-  get email(): string {
-    return this._email;
-  }
-  get phone(): string {
-    return this._phone;
-  }
-  get address(): string {
-    return this._address;
-  }
 
   constructor() {
     /* this._payment = "";
